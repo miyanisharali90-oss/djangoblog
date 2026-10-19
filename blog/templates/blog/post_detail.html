@@ -1,0 +1,53 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    {% if post.cover_image %}
+        <img
+            src="{{ post.cover_image.url }}"
+            class="img-fluid rounded mb-3"
+            alt="{{ post.title }}"
+            style="max-height: 450px; width: 100%; object-fit: cover;"
+        >
+    {% endif %}
+
+    <h1>{{ post.title }}</h1>
+
+    <p class="text-muted">
+        By {{ post.author.username }}
+        on {{ post.created_at|date:"M d, Y" }}
+    </p>
+
+    <div class="mb-4">
+        {{ post.content|linebreaks }}
+    </div>
+
+    {% if user.is_authenticated and post.author_id == user.id %}
+
+        <a
+            href="{% url 'post_edit' slug=post.slug %}"
+            class="btn btn-warning btn-sm"
+        >
+            Edit
+        </a>
+
+        <a
+            href="{% url 'post_delete' slug=post.slug %}"
+            class="btn btn-danger btn-sm"
+        >
+            Delete
+        </a>
+
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="btn btn-secondary btn-sm">
+        Back to Home
+    </a>
+
+</div>
+
+{% endblock %}

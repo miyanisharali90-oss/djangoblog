@@ -1,0 +1,45 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2 class="mb-4">My Posts</h2>
+
+    <div class="row">
+        {% for post in page_obj %}
+            {% include "blog/partials/_post_card.html" %}
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center text-muted py-5">
+                    You haven't written any posts yet - <a href="{% url 'post_create' %}">start now!</a>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+    <nav>
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                </li>
+            {% endif %}
+
+            <li class="page-item disabled">
+                <span class="page-link">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+</div>
+{% endblock %}

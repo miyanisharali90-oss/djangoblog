@@ -6,7 +6,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ("title", "status", "created_at")
     list_filter = ("status",)
     search_fields = ("title", "content")
-    prepopulated_fields = {"slug": ("title",)}
+    prepopulated_fields = {"slug": ('title',)}
     filter_horizontal = ("tags",)
 
 @admin.register(Category)
@@ -16,3 +16,6 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ("name",)
+
+# Register your models here.
+

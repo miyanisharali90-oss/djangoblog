@@ -1,8 +1,16 @@
+/* General Body Styling */
 body {
-    background-color: red;
+    background-color: #f8f9fa; /* Light gray background for better contrast */
 }
 
+/* Navbar Brand Styling */
 .navbar-brand {
     font-weight: bold;
     letter-spacing: 0.5px;
+}
+
+/* Card Image Styling */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
 }
